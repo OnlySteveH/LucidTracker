@@ -1,2 +1,10 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<% if @user.nil? %>
+  <p>User doesn't exist.</p>
+<% else %>
+  <p><%= @user.name %></p>
+  <ul>
+    <li>email: <%= @user.email %></li>
+    <li>created_at: <%= @user.created_at %></li>
+    <li>updated at: <%= @user.updated_at %></li>
+  </ul>
+<% end %>
