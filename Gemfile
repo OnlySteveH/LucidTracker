@@ -5,16 +5,15 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'bcrypt', '3.1.11'
+gem 'coffee-rails', '4.2.2'
+gem 'jbuilder', '2.7.0'
 gem 'puma', '3.10.0'
 gem 'rails', '5.1.4'
 gem 'sass-rails', '5.0.6'
 gem 'sqlite3', '1.3.13'
-gem 'uglifier', '3.2.0'
-
-gem 'bcrypt', '3.1.11'
-gem 'coffee-rails', '4.2.2'
-gem 'jbuilder', '2.7.0'
 gem 'turbolinks', '5.0.1'
+gem 'uglifier', '3.2.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
