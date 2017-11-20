@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   get '/signup', to: 'users#new'
-  get  'static_pages/FAQ'
-  get  'static_pages/Co_to'
   post '/signup', to: 'users#create'
+  get  '/FAQ', to: 'static_pages#FAQ'
+  get  '/Co_to', to: 'static_pages#Co_to'
   
 
   resources :users
+  resources :static_pages
 end
