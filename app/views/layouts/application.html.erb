@@ -1,7 +1,8 @@
+<% provide(:maintitle, "LucidTracker") %>
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LucidTracker</title>
+    <title><%= yield(:maintitle) %></title>
     <%= render 'layouts/rails_default' %>
   </head>
 
