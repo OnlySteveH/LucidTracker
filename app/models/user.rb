@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
+  has_many :sessions, dependent: :destroy
 
   validates :name, presence: true,
                    length: { minimum: 3, maximum: 10 }
@@ -12,11 +13,18 @@ class User < ApplicationRecord
 
   before_save { email.downcase! }
 
-  class << self
-    def digest(string)
-      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST
-                                                  : BCrypt::Engine.cost
-      BCrypt::Password.create(string, cost: cost)
-    end
+  def authenticated?(remember_token)
+    sessions.each { |session| return true if session.match? remember_token }
+    false
+  end
+
+  def remember
+    remember_token = Session.new_token
+    sessions.create(remember_digest: Session.digest(remember_token))
+    remember_token
+  end
+
+  def forget
+    sessions.delete_all
   end
 end
