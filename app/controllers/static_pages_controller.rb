@@ -1,7 +1,5 @@
 class StaticPagesController < ApplicationController
-  def FAQ
-  end
+  def faq; end
 
-  def Co_to
-  end
+  def co_to; end
 end
