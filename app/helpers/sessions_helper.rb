@@ -1,6 +1,6 @@
 module SessionsHelper
-  def log_in(user, options = {})
-    if options[:remember] == '1'
+  def log_in(user, remember: '0')
+    if remember == '1'
       remember user
     else
       reset_session
@@ -9,8 +9,8 @@ module SessionsHelper
   end
 
   def remember(user)
-    remember_token = user.remember
-    cookies.permanent[:remember_token] = remember_token
+    user.remember
+    cookies.permanent[:remember_token] = user.remember_token
     cookies.permanent.signed[:user_id] = user.id
   end
 
@@ -19,9 +19,9 @@ module SessionsHelper
   end
 
   def find_current_user
-    if (user_id = session[:user_id])
+    if (user_id = session[:user_id]) # User is not remembered
       @current_user = User.find_by(id: user_id)
-    elsif (user_id = cookies.signed[:user_id])
+    elsif (user_id = cookies.signed[:user_id]) # User is remembered
       user = User.find_by(id: user_id)
       remember_token = cookies[:remember_token]
       (@current_user = user) if user && user.authenticated?(remember_token)

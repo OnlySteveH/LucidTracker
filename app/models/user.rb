@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
+  attr_accessor :remember_token
+
   has_many :sessions, dependent: :destroy
 
   validates :name, presence: true,
@@ -19,7 +21,7 @@ class User < ApplicationRecord
   end
 
   def remember
-    remember_token = Session.new_token
+    self.remember_token = Session.new_token
     sessions.create(remember_digest: Session.digest(remember_token))
     remember_token
   end

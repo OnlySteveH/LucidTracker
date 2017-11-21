@@ -5,15 +5,7 @@ class Session < ApplicationRecord
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
 
-  class << self
-    def new_token
-      SecureRandom.urlsafe_base64
-    end
-
-    def digest(string)
-      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST
-                                                  : BCrypt::Engine.cost
-      BCrypt::Password.create(string, cost: cost)
-    end
+  def self.new_token
+    SecureRandom.urlsafe_base64
   end
 end
