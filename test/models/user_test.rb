@@ -35,8 +35,8 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'valid emails should be valid' do
-    valid_emails = %w[ seed-123@whop.whop.com SeEd@birb-page.com
-                       pee_ka_boo@t.org whatEv@123.and.more.seeds.com ]
+    valid_emails = %w[seed-123@whop.whop.com SeEd@birb-page.com
+                      pee_ka_boo@t.org whatEv@123.and.more.seeds.com]
     valid_emails.each do |email|
       @user.email = email
       assert @user.valid?, "User with valid email #{email} is not valid"
@@ -44,7 +44,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'invalid emails should be invalid' do
-    invalid_emails = %w[ w/o=t@isdat @seed te@st..com no@dot,com 123@45.67 asd ]
+    invalid_emails = %w[w/o=t@isdat @seed te@st..com no@dot,com 123@45.67 asd]
     invalid_emails.each do |email|
       @user.email = email
       assert_not @user.valid?, "User with invalid email #{email} is valid"
