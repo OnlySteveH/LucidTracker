@@ -4,3 +4,5 @@ testuser:
   name: TestName
   email: test@example.com
   password_digest: <%= User.digest('Password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>

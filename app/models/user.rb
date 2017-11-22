@@ -1,7 +1,9 @@
 class User < ApplicationRecord
-  has_secure_password
-  attr_accessor :remember_token
+  before_save :downcase_email
+  before_create :create_activation_digest
 
+  attr_accessor :remember_token, :activation_token
+  has_secure_password
   has_many :sessions, dependent: :destroy
 
   validates :name, presence: true,
@@ -13,20 +15,41 @@ class User < ApplicationRecord
   validates :password, presence: true,
                        length: { minimum: 6 }
 
-  before_save { email.downcase! }
-
   def authenticated?(remember_token)
     sessions.each { |session| return true if session.match? remember_token }
     false
   end
 
   def remember
-    self.remember_token = Session.new_token
-    sessions.create(remember_digest: Session.digest(remember_token))
-    remember_token
+    self.remember_token = User.new_token
+    sessions.create(remember_digest: User.digest(remember_token))
+    remember_token # return remember token so that it can be saved in cookie
   end
 
   def forget
     sessions.delete_all
+  end
+
+  private
+
+    def downcase_email
+      email.downcase!
+    end
+
+    def create_activation_digest
+      self.activation_token = User.new_token
+      self.activation_digest = User.digest(activation_token)
+    end
+
+  class << self
+    def digest(string)
+      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST
+                                                  : BCrypt::Engine.cost
+      BCrypt::Password.create(string, cost: cost)
+    end
+
+    def new_token
+      SecureRandom.urlsafe_base64
+    end
   end
 end
