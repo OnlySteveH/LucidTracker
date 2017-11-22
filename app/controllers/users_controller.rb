@@ -6,8 +6,9 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)
     if @user.save
-      flash[:success] = 'You signed up successfully'
-      redirect_to @user
+      UserMailer.account_activation(@user).deliver_now
+      flash[:info] = 'Please check your email to activate your account'
+      # redirect_to root_url # We don't have root path yet
     else
       render 'users/new'
     end
