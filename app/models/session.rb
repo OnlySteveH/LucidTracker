@@ -1,7 +1,5 @@
 class Session < ApplicationRecord
-  belongs_to :user
+  include DigestMatcher
 
-  def match?(remember_token)
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
-  end
+  belongs_to :user
 end

@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include DigestMatcher
+
   before_save :downcase_email
   before_create :create_activation_digest
 
@@ -15,8 +17,10 @@ class User < ApplicationRecord
   validates :password, presence: true,
                        length: { minimum: 6 }
 
-  def authenticated?(remember_token)
-    sessions.each { |session| return true if session.match? remember_token }
+  def remembered?(remember_token)
+    sessions.each do |session|
+      return true if session.match? :remember, remember_token
+    end
     false
   end
 

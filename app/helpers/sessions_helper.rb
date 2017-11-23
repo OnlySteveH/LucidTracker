@@ -24,7 +24,7 @@ module SessionsHelper
     elsif (user_id = cookies.signed[:user_id]) # User is remembered
       user = User.find_by(id: user_id)
       remember_token = cookies[:remember_token]
-      (@current_user = user) if user && user.authenticated?(remember_token)
+      (@current_user = user) if user && user.remembered?(remember_token)
     end
   end
 
