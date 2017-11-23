@@ -19,7 +19,7 @@ class User < ApplicationRecord
 
   def remembered?(remember_token)
     sessions.each do |session|
-      return true if session.match? :remember, remember_token
+      return true if session.match_digest? :remember, remember_token
     end
     false
   end
