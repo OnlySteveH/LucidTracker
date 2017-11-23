@@ -26,7 +26,9 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_not_empty cookies[:remember_token]
     assert_not_empty cookies[:user_id]
     assert session[:user_id].nil?
-    assert_equal assigns(:user).remember_token, cookies[:remember_token]
+    user = assigns(:user) # Fetch @user from controller
+    assert_equal user.remember_token, cookies[:remember_token]
+    assert user.remembered?(user.remember_token)
   end
 
   test 'unsuccessful login' do
