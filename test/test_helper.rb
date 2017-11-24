@@ -8,4 +8,13 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  include SessionsHelper
+end
+
+class ActionDispatch::IntegrationTest
+  def login_as(user, password: 'Password', remember: '0')
+    post login_path, params: { session: { email: user.email,
+                                          password: password,
+                                          remember: remember } }
+  end
 end
