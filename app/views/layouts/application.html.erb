@@ -7,22 +7,22 @@
   </head>
 
   <body>
-<<<<<<< HEAD
     <%= link_to "FAQ", "/faq" %>
 
 <%= link_to "Co to", "/co_to"  %>
 
 <%= link_to "Home", "/strona"  %>
 
-<%= link_to "Sign up", "/users/new"  %>
 
 
-=======
     <% if logged_in? %>
       <%= "You're logged in!" if logged_in? %>
       <%= link_to 'Log out', logout_path, method: :delete %>
+    <% else %>
+      <%= link_to "Sign up", "/signup"  %>
+      <%= link_to "Log in", "/login"  %>
+      
     <% end %>
->>>>>>> master
     <% flash.each do |message_type, message| %>
       <%= content_tag(:div, message, class: "alert-#{message_type}") %>
     <% end %>
