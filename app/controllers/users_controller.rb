@@ -24,7 +24,7 @@ def edit
  def update
     @user = User.find_by(id: params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = 'You signed up successfully'
+      flash[:success] = 'Your account was edited successfully'
       redirect_to @user
     else
       render 'users/edit'
