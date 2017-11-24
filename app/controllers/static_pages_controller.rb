@@ -1,7 +1,17 @@
 class StaticPagesController < ApplicationController
-  def FAQ
+  
+  def faq ;
   end
-
-  def Co_to
+ 
+  def co_to ;
   end
+  
+  def strona;
+  end
+  
+  def spis
+     @user = User.find_by(id: params[:id]);
+  end
+  
+  
 end

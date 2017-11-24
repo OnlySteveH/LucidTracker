@@ -2,15 +2,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= yield(:title) %></title>
-    <%= render 'layouts/rails_default' %>
+    <title><%= "#{yield(:title)} | LucidTracker" %></title>
+   
   </head>
 
   <body>
+    <%= link_to "FAQ", "/faq" %>
+
+<%= link_to "Co to", "/co_to"  %>
+
+<%= link_to "Home", "/strona"  %>
+
+<%= link_to "Sign up", "/users/new"  %>
+
+<% if @user.nil? %>
+  User doesn't exist.
+<% else %>
+ <%= @user.name %>
+<% end %>
     <% flash.each do |message_type, message| %>
       <%= content_tag(:div, message, class: "alert-#{message_type}") %>
     <% end %>
+   
     <%= yield %>
     <%= debug(params) if Rails.env.development? %>
+   
+
   </body>
 </html>
