@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   
 
   get '/signup', to: 'users#new'
@@ -10,6 +11,6 @@ Rails.application.routes.draw do
   get '/strona', to:'static_pages#strona'
   
 
+
   resources :users
-  resources :static_pages
 end

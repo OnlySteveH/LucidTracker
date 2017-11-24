@@ -1,4 +1,5 @@
 class StaticPagesController < ApplicationController
+
   
   def faq ;
   end
@@ -14,4 +15,5 @@ class StaticPagesController < ApplicationController
   end
   
   
+
 end
