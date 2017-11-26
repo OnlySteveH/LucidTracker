@@ -5,5 +5,5 @@ class StaticPagesController < ApplicationController
 
   def home; end
 
-  def spis; end
+  def contents; end
 end

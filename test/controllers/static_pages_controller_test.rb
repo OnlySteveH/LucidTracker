@@ -1,25 +1,25 @@
 require 'test_helper'
 
 class StaticPagesControllerTest < ActionDispatch::IntegrationTest
-  test "should get spis" do
-    get static_pages_spis_url
+  test 'should get contents' do
+    get contents_url
     assert_response :success
   end
 
-  test "should get strona" do
-    get static_pages_strona_url
+  test 'should get home' do
+    get root_url
     assert_response :success
-  end
-   test "should get faq" do
-    get static_pages_faq_url
-    assert_response :success
-     
   end
 
-  test "should get co_to" do
-    get static_pages_co_to_url
+  test 'should get faq' do
+    get faq_url
     assert_response :success
-     
+  end
+
+  test 'should get about' do
+    get about_url
+    assert_response :success
+
   end
 
 end
