@@ -11,9 +11,3 @@
 <p> </p>
 <%= link_to "Sign up", "/users/new"  %>
 <p> </p>
-<% if @user.nil? %>
-  <p>User doesn't exist.</p>
-<% else %>
-  <p><%= @user.name %></p>
-  <% end %>
-

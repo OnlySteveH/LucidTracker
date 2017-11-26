@@ -7,16 +7,16 @@
   </head>
 
   <body>
-    <%= link_to "FAQ", "/faq" %>
-    <%= link_to "Co to", "/co_to"  %>
-    <%= link_to "Home", "/"  %>
+    <%= link_to "FAQ", faq_path %>
+    <%= link_to "Co to", about_path  %>
+    <%= link_to "Home", root_path  %>
 
     <% if logged_in? %>
       <%= "You're logged in!" if logged_in? %>
       <%= link_to 'Log out', logout_path, method: :delete %>
     <% else %>
-      <%= link_to "Sign up", "/signup"  %>
-      <%= link_to "Log in", "/login"  %>
+      <%= link_to "Sign up", signup_path  %>
+      <%= link_to "Log in", login_path  %>
     <% end %>
 
     <% flash.each do |message_type, message| %>
