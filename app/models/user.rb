@@ -18,10 +18,7 @@ class User < ApplicationRecord
                        length: { minimum: 6 }
 
   def remembered?(remember_token)
-    sessions.each do |session|
-      return true if session.match_digest? :remember, remember_token
-    end
-    false
+    sessions.any? { |session| session.match_digest? :remember, remember_token }
   end
 
   def remember
