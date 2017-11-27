@@ -17,4 +17,15 @@ class ActionDispatch::IntegrationTest
                                           password: password,
                                           remember: remember } }
   end
+
+  # Edit this method so that it doesn't use test jar
+  def logged_in?
+    if (user_id = session[:user_id]) # User is not remembered
+      @current_user = User.find_by(id: user_id)
+    elsif (user_id = cookies.signed[:user_id]) # User is remembered
+      user = User.find_by(id: user_id)
+      remember_token = cookies[:remember_token]
+      (@current_user = user) if user && user.remembered?(remember_token)
+    end
+  end
 end
