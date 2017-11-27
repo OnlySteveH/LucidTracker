@@ -17,12 +17,13 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     delete logout_path
     login_as @user, remember: '0'
     assert_not session[:user_id].nil?
-    assert_empty cookies[:remember_token]
-    assert_empty cookies[:user_id]
+    assert_nil cookies[:remember_token]
+    assert_nil cookies[:user_id]
   end
 
   test 'login with remembering' do
     login_as @user, remember: '1'
+    assert logged_in?
     assert_not_empty cookies[:remember_token]
     assert_not_empty cookies[:user_id]
     assert session[:user_id].nil?
