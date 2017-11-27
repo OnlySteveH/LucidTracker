@@ -26,16 +26,15 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_not user.activated?
     # Try to log in before activation
     login_as user, password: valid_data[:password]
-    # Here I need to somehow add signed cookies
     assert_not logged_in?
     # Invalid activation token
-    get edit_activation_account_path('invalid token', email: user.email)
+    get edit_account_activation_path('invalid token', email: user.email)
     assert_not logged_in?
     # Valid token, invalid email
-    get edit_activation_account_path(user.activation_token, email: 'invalid')
+    get edit_account_activation_path(user.activation_token, email: 'invalid')
     assert_not logged_in?
     # Valid activation
-    get edit_activation_account_path(user.activation_token, email: user.email)
+    get edit_account_activation_path(user.activation_token, email: user.email)
     assert user.reload.activated?
     follow_redirect!
     assert_template 'users/show'
